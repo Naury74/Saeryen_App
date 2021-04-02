@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="array_push_rington">
+        <item>기본음</item>
+        <item>세련</item>
+    </string-array>
+    <string-array name="array_push_rington_value">
+        <item>def</item>
+        <item>sel</item>
+    </string-array>
+</resources>

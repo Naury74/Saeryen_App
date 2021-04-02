@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory android:title="알림">
+        <PreferenceScreen android:title="푸시 알림 설정"
+            android:key="push_set">
+            <PreferenceCategory android:title="푸시 알림">
+                <SwitchPreference
+                    android:title="댓글 푸시 알림"
+                    android:defaultValue="false"
+                    android:key="push_comment"
+                    android:textColor="#000000" />
+                <SwitchPreference
+                    android:title="채팅 푸시 알림"
+                    android:defaultValue="false"
+                    android:key="push_chat"
+                    android:textColor="#000000" />
+                <SwitchPreference
+                    android:title="새글 푸시 알림"
+                    android:defaultValue="false"
+                    android:key="push_timeline"
+                    android:textColor="#000000" />
+            </PreferenceCategory>
+
+            <PreferenceCategory android:title="상세 설정">
+                <SwitchPreference
+                    android:title="알림 내용 미리보기"
+                    android:summaryOn="사용"
+                    android:summaryOff="글, 댓글, 채팅 등의 메시지 내용 일부를 보여줍니다"
+                    android:defaultValue="false"
+                    android:key="set_push_view_detail"
+                    android:textColor="#000000" />
+                <SwitchPreference
+                    android:title="에티켓 모드"
+                    android:defaultValue="false"
+                    android:key="push_silence_mode"
+                    android:summaryOn="사용"
+                    android:summaryOff="사용안함"
+                    android:textColor="#000000" />
+            </PreferenceCategory>
+
+        </PreferenceScreen>
+        <SwitchPreference
+            android:title="진동"
+            android:defaultValue="false"
+            android:key="push_vibe"
+            android:summaryOn="사용"
+            android:summaryOff="사용안함"
+            android:textColor="#000000" />
+        <RingtonePreference
+            android:title="알림음"
+            android:key="push_sound_list"
+            android:textColor="#000000">
+        </RingtonePreference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="대화"
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false">
+        <Preference android:title="대화방 차단 설정"
+            android:key="user_ben_set">
+        </Preference>
+        <Preference android:title="대화기록 모두 삭제"
+            android:key="delete_chat_list">
+        </Preference>
+        <Preference android:title="키워드 알림 설정"
+            android:key="notice_chat_keyword">
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="잠금">
+        <Preference
+            android:title="PIN/지문 잠금"
+            android:key="applock" />
+        <Preference android:title="PIN 변경"
+            android:key="pw_change">
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="이용 안내"
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false">
+        <Preference android:title="앱 버전"
+            android:summary="1.0.0"
+            android:key="app_version">
+        </Preference>
+        <Preference android:title="문의하기"
+            android:key="inquiry">
+        </Preference>
+        <Preference android:title="세련 공지사항"
+            android:key="notice_selyen">
+        </Preference>
+
+        <PreferenceScreen android:title="서비스 이용약관"
+            android:key="service_tos_view">
+            <PreferenceCategory android:title="서비스 이용약관">
+                <Preference android:title="세련 이용약관"
+                    android:key="selyen_tos_view">
+                </Preference>
+                <Preference android:title="위치기반 서비스 이용약관"
+                    android:key="gps_tos_view">
+                </Preference>
+            </PreferenceCategory>
+
+        </PreferenceScreen>
+
+        <Preference android:title="개인정보 처리방침"
+            android:key="personal_tos">
+        </Preference>
+        <Preference android:title="오픈소스 라이선스"
+            android:key="open_source_library_list">
+        </Preference>
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="기타"
+        app:allowDividerBelow="false"
+        app:allowDividerAbove="false">
+        <Preference android:title="언어 설정"
+            android:key="language_set">
+        </Preference>
+        <Preference android:title="로그아웃"
+            android:key="logout">
+        </Preference>
+        <Preference android:title="탈퇴하기"
+            android:key="sign_out">
+        </Preference>
+    </PreferenceCategory>
+</PreferenceScreen>

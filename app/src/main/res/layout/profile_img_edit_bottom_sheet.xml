@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/container_bottom_sheet"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bottom_sheet_round_background"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="35dp"
+    android:paddingVertical="20dp"
+    android:layout_height="120dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/camera_btn"
+        android:background="@drawable/ripple_white_bg_round10"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/camera_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_gallery">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/camera_name"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:text="프로필 사진 변경"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="15dp"
+            android:gravity="center|left"
+            android:textColor="#000000"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/remove_btn"
+        android:background="@drawable/ripple_white_bg_round10"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true">
+
+        <ImageView
+            android:id="@+id/remove_image"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_delete">
+        </ImageView>
+
+        <TextView
+            android:id="@+id/remove_name"
+            android:layout_width="250dp"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="30dp"
+            android:text="프로필 사진 삭제"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="15dp"
+            android:gravity="center|left"
+            android:textColor="#000000"></TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

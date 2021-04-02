@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/container_bottom_sheet"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bottom_sheet_round_background"
+    android:layout_width="match_parent"
+    android:layout_height="600dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/logo"
+        android:layout_width="75dp"
+        android:layout_height="35dp"
+        android:layout_gravity="center"
+        app:layout_constraintDimensionRatio="w,322:153"
+        android:background="@drawable/ic_saeryen_logo_3065f3"
+        android:layout_marginTop="50dp">
+    </TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="22dp"
+        android:layout_gravity="center"
+        android:text="나와 이웃간의 소식을 간편하게!"
+        android:fontFamily="@font/nanumsquare_acr"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:textColor="@color/selyen_blue"
+        android:textSize="16dp"
+        android:layout_marginTop="10dp"></TextView>
+
+    <TextView
+        android:id="@+id/sub_title"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_gravity="center"
+        android:text="접근 권한 설정"
+        android:fontFamily="@font/nanumsquare_acb"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="20dp"
+        android:layout_marginTop="40dp"></TextView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:text="세련 서비스가 이웃 간의 커뮤니티 기능을 제공하기 위해서는 이웃 인증을 위한 SMS 인증, 계정 정보 및 게시물 작성에 필요한 사진, 기타 미디어 파일에 접근할 수 있도록 접근 권한이 필요합니다. 세련 서비스의 기능을 위해서는 통신 및 저장 공간에 대한 접근 권한이 필수이며 사용 기능에 따라 기능 사용 시 추가적인 권한을 요청할 수 있습니다."
+        android:textColor="#000000"
+        android:textSize="13dp"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginTop="30dp"></TextView>
+
+    <LinearLayout
+        android:id="@+id/confirm_btn"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:clickable="true"
+        android:onClick="onClick_apply"
+        android:layout_gravity="end"
+        android:background="@drawable/round_able_btn"
+        android:layout_marginHorizontal="50dp"
+        android:layout_marginVertical="30dp">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:text="허용"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:textSize="15dp"></TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

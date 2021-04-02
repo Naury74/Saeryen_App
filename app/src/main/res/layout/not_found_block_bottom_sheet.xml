@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/container_bottom_sheet"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bottom_sheet_round_background"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="35dp"
+    android:paddingVertical="40dp"
+    android:layout_height="450dp"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="@drawable/ic_empty_red">
+    </TextView>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ripple_white_bg_round10"
+        android:layout_width="match_parent"
+        android:layout_height="30dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:text="블록을 찾을 수 없어요"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textStyle="bold"
+            android:textSize="25dp"
+            android:gravity="center"
+            android:textColor="#000000"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="40dp"
+        android:background="@drawable/ripple_white_bg_round10"
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:text="해당 위치에 블록을 생성하거나,"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:textColor="#000000"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:background="@drawable/ripple_white_bg_round10"
+        android:layout_width="match_parent"
+        android:layout_height="25dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:text="다른 위치에서 검색이 가능해요."
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="18dp"
+            android:gravity="center"
+            android:textColor="#000000"></TextView>
+
+    </LinearLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/ripple_white_bg_round10"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginTop="40dp"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/cancel_btn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ripple_stroke_blue_btn"
+            android:text="다시 검색"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="@color/selyen_blue"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="0.1sp"
+            app:autoSizeStepGranularity="0.1sp"
+            android:clickable="true"
+            android:paddingVertical="10dp"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintHeight_percent="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.05"></TextView>
+
+
+        <TextView
+            android:id="@+id/add_btn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ripple_custom_login_btn"
+            android:text="블록 생성"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            app:autoSizeTextType="uniform"
+            app:autoSizeMinTextSize="0.1sp"
+            app:autoSizeStepGranularity="0.1sp"
+            android:clickable="true"
+            android:paddingVertical="10dp"
+            android:focusable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintWidth_percent="0.45"
+            app:layout_constraintHeight_percent="1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.95"></TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

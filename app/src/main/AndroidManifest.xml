@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.classy.selyen">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_NUMBERS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.USE_BIOMETRIC" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_selyen_logo"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_selyen_logo_round"
+        android:supportsRtl="true"
+        android:theme="@style/MainTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name="com.classy.selyen.Write_Post_Activity"
+            android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.classy.selyen.Write_Notice_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.CompleteJoinActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.Block_Verify_Code_Input_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.CustomScannerActivity"
+            android:screenOrientation="portrait"
+            android:stateNotNeeded="true"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+        <activity
+            android:name="com.classy.selyen.Select_Join_Method_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.Address_Map_Find_Activity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name="com.classy.selyen.MyFirebaseMessagingService"
+            android:enabled="true"
+            android:exported="true"
+            android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name="com.classy.selyen.CommuPageActivity" />
+        <activity
+            android:name="com.classy.selyen.PictureZoomUrlActivity"
+            android:theme="@style/PictureZoomTheme" />
+        <activity
+            android:name="com.classy.selyen.ChangeNicnameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.ChangeEmailActivity"
+            android:screenOrientation="portrait" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.classy.selyen.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+
+        <activity
+            android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+            android:theme="@style/CropTheme" />
+        <activity
+            android:name="com.classy.selyen.AppVersionPrintActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.OSS_License_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.PictureZoomActivity"
+            android:theme="@style/PictureZoomTheme" />
+        <activity
+            android:name="com.classy.selyen.NoticeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.MapLocationApplyActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MapTheme" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCo5Y9SAI7nQyR-cg1CUnojgtK_YoSqFGA" />
+
+        <activity
+            android:name="com.classy.selyen.FingerPrintActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.classy.selyen.AppPassInputActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.classy.selyen.UserProfileEditActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.MainSettingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SettingTheme" />
+        <activity
+            android:name="com.classy.selyen.ChangePasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.FindPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.GPS_Service_TosView_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.PersonalInfo_TosView_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.Selyen_TosView_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.CompleteSignUpActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.classy.selyen.SignUp_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.SelfcertificationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.TOS_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.classy.selyen.LogIn_Activity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
+        <activity
+            android:name="com.classy.selyen.SplashActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/SplashTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.classy.selyen.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MainTheme" />
+    </application>
+
+</manifest>

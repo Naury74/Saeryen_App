@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/container_edit_addr_bottom_sheet"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/bottom_sheet_round_background"
+    android:layout_width="match_parent"
+    android:paddingHorizontal="35dp"
+    android:paddingVertical="20dp"
+    android:layout_height="120dp"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/title"
+        android:background="@drawable/ripple_white_bg_round10"
+        android:layout_width="match_parent"
+        android:layout_height="35dp">
+
+        <TextView
+            android:id="@+id/title_text"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:text="주소 등록이 필요해요. 지금 등록 하시겠어요?"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="15dp"
+            android:gravity="center|left"
+            android:textColor="#000000"></TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/edit_addr__btn"
+        android:background="@drawable/ripple_stroke_semi_btn_10"
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/edit_addr_text"
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:layout_gravity="center"
+            android:text="주소 등록하기"
+            android:fontFamily="@font/nanumsquare_acr"
+            android:textSize="15dp"
+            android:gravity="center"
+            android:textColor="@color/selyen_blue"></TextView>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
+    <color name="selyen_blue">#3065F3</color>
+    <color name="main_background">#F4F5FA</color>
+    <color name="sub_r">#FF2460</color>
+    <color name="sub_g">#3acc4b</color>
+    <color name="text_color">#5F5F5F</color>
+    <color name="sub_text_color">#C6C6C6</color>
+    <color name="black">#000000</color>
+</resources>

@@ -1,0 +1,30 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="512dp"
+    android:height="512dp"
+    android:viewportWidth="510"
+    android:viewportHeight="510">
+  <path
+      android:fillColor="@color/selyen_blue"
+      android:pathData="m390,302.566v-2.566h-270v2.566c0,33.789 -16.887,65.341 -45,84.084v48.35h360v-48.351c-28.113,-18.742 -45,-50.295 -45,-84.083z"/>
+  <path
+      android:fillColor="@color/selyen_blue"
+      android:pathData="m120,240h270v30h-270z"/>
+  <path
+      android:fillColor="@color/selyen_blue"
+      android:pathData="m390,206.649c0,-64.247 -44.881,-118.006 -105,-131.649v-45c0,-16.568 -13.432,-30 -30,-30s-30,13.432 -30,30v45c-60.119,13.643 -105,67.402 -105,131.649v3.351h270z"/>
+  <path
+      android:fillColor="@color/selyen_blue"
+      android:pathData="m255,510c24.852,0 45,-20.147 45,-45h-90c0,24.853 20.147,45 45,45z"/>
+  <path
+      android:fillColor="@color/selyen_blue"
+      android:pathData="m105,90v-30c-24.813,0 -45,20.187 -45,45h30c0,-8.271 6.729,-15 15,-15z"/>
+  <path
+      android:fillColor="@color/selyen_blue"
+      android:pathData="m105,0c-57.897,0 -105,47.103 -105,105h30c0,-41.355 33.645,-75 75,-75z"/>
+  <path
+      android:fillColor="@color/selyen_blue"
+      android:pathData="m405,60v30c8.271,0 15,6.729 15,15h30c0,-24.813 -20.187,-45 -45,-45z"/>
+  <path
+      android:fillColor="@color/selyen_blue"
+      android:pathData="m405,0v30c41.355,0 75,33.645 75,75h30c0,-57.897 -47.103,-105 -105,-105z"/>
+</vector>
