@@ -54,6 +54,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -172,8 +174,8 @@ public class Write_Notice_Activity extends AppCompatActivity {
 
     public void onClick_apply(View v){
         if(none_text_check){
-            Toast.makeText(this, "입력 내용:"+text_input.getText().toString(), Toast.LENGTH_SHORT).show();
-            finish();
+            ContentDataToServer task = new ContentDataToServer();
+            task.execute();
         }else{
             Toast.makeText(this, "입력된 내용이 없어요!", Toast.LENGTH_SHORT).show();
         }
@@ -370,6 +372,25 @@ public class Write_Notice_Activity extends AppCompatActivity {
         finish();
     }
 
+    public String saveBitmaptoJpeg(Bitmap bitmap){
+        File storage = getCacheDir();
+        String fileName = "cache_img.jpg";
+
+        File file_path = new File(storage,fileName);;
+        try{
+
+            FileOutputStream out = new FileOutputStream(file_path);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.close();
+
+        }catch(FileNotFoundException exception){
+            Log.e("FileNotFoundException", exception.getMessage());
+        }catch(IOException exception){
+            Log.e("IOException", exception.getMessage());
+        }
+        return getCacheDir()+"/"+fileName;
+    }
+
     String result_check_json;
     //로그인 시에 서버에 로그인 정보 넘겨주고 리턴값 받음
     class ContentDataToServer extends AsyncTask<String, Void, String> {
@@ -390,7 +411,8 @@ public class Write_Notice_Activity extends AppCompatActivity {
             Log.d(TAG, "Data Post - App : " + result);
 
             if(sign_check_return.equals("SUCCESS")){
-
+                Toast.makeText(Write_Notice_Activity.this, "등록 완료", Toast.LENGTH_SHORT).show();
+                finish();
             }else{
                 Toast.makeText(Write_Notice_Activity.this, "글 등록에 실패했습니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
             }
@@ -470,43 +492,39 @@ public class Write_Notice_Activity extends AppCompatActivity {
                 if( bitmaps.size() > 0){
 
                     for ( int i = 0 ; i < bitmaps.size(); i++){
-                        String a = String.valueOf(i);
+                        String a = String.valueOf(i+1);
 
-//                        File sourceFile = new File(imageArray.get(i));
-//                        FileInputStream fileInputStream = new FileInputStream(sourceFile);
-//
-//                        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-//                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-//                        byte[] byteArray = byteArrayOutputStream .toByteArray();
-//
-//
-//                        //php단에서 $_FILES['uploaded_file'] 에  아래의  filename=""+ imageArray.get(i) 이들어간다
-//                        // 여러개를 보낼때 주의 사항은  $_FILES['uploaded_file']의  'uploaded_file' 는 키값처럼들어가는데
-//                        // 중복되는 경우 마지막 데이터만 전송됨으로  아래에서는 반복문의 i 값을 string으로 변환하여 구분을 주었다.
-//                        // php 단에서도 구분지어서 받아야 한다.
-//                        dos = new DataOutputStream(conn.getOutputStream());
-//                        dos.writeBytes(twoHyphens + boundary + lineEnd);
-//                        dos.writeBytes("Content-Disposition: form-data; name=\"uploaded_file"+a+"\";filename=\""+ imageArray.get(i) + "\"" + lineEnd);
-//                        dos.writeBytes(lineEnd);
-//
-//
-//                        // create a buffer of  maximum size
-//                        bytesAvailable = fileInputStream.available();
-//                        bufferSize = Math.min(bytesAvailable, maxBufferSize);
-//                        buffer = new byte[bufferSize];
-//
-//                        bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-//
-//
-//                        while (bytesRead > 0) {
-//                            dos.write(buffer, 0, bufferSize);
-//                            bytesAvailable = fileInputStream.available();
-//                            bufferSize = Math.min(bytesAvailable, maxBufferSize);
-//                            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
-//                        }
-//
-//                        dos.writeBytes(lineEnd);
-//                        dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
+                        String path = saveBitmaptoJpeg(bitmaps.get(i));//이미지 캐시 파일 생성
+
+                        File sourceFile = new File(path);
+                        FileInputStream fileInputStream = new FileInputStream(sourceFile);
+
+                        //php단에서 $_FILES['uploaded_file'] 에  아래의  filename=""+ imageArray.get(i) 이들어간다
+                        // 여러개를 보낼때 주의 사항은  $_FILES['uploaded_file']의  'uploaded_file' 는 키값처럼들어가는데
+                        // 중복되는 경우 마지막 데이터만 전송됨으로  아래에서는 반복문의 i 값을 string으로 변환하여 구분을 주었다.
+                        dos = new DataOutputStream(conn.getOutputStream());
+                        dos.writeBytes(twoHyphens + boundary + lineEnd);
+                        dos.writeBytes("Content-Disposition: form-data; name=\"img_"+a+"\";filename=\""+ path + "\"" + lineEnd);
+                        dos.writeBytes(lineEnd);
+
+
+                        // create a buffer of  maximum size
+                        bytesAvailable = fileInputStream.available();
+                        bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                        buffer = new byte[bufferSize];
+
+                        bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+
+
+                        while (bytesRead > 0) {
+                            dos.write(buffer, 0, bufferSize);
+                            bytesAvailable = fileInputStream.available();
+                            bufferSize = Math.min(bytesAvailable, maxBufferSize);
+                            bytesRead = fileInputStream.read(buffer, 0, bufferSize);
+                        }
+
+                        dos.writeBytes(lineEnd);
+                        dos.writeBytes(twoHyphens + boundary + twoHyphens + lineEnd);
                     }
                 }
 
