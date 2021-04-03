@@ -28,31 +28,33 @@
         android:supportsRtl="true"
         android:theme="@style/MainTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.classy.selyen.Write_Post_Activity"
-            android:screenOrientation="portrait"></activity>
+        <activity android:name=".CreateBlockQRActivity"></activity>
         <activity
-            android:name="com.classy.selyen.Write_Notice_Activity"
+            android:name=".Write_Post_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.CompleteJoinActivity"
+            android:name=".Write_Notice_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.Block_Verify_Code_Input_Activity"
+            android:name=".CompleteJoinActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.CustomScannerActivity"
+            android:name=".Block_Verify_Code_Input_Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".CustomScannerActivity"
             android:screenOrientation="portrait"
             android:stateNotNeeded="true"
             android:windowSoftInputMode="stateAlwaysHidden" />
         <activity
-            android:name="com.classy.selyen.Select_Join_Method_Activity"
+            android:name=".Select_Join_Method_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.Address_Map_Find_Activity"
+            android:name=".Address_Map_Find_Activity"
             android:screenOrientation="portrait" />
 
         <service
-            android:name="com.classy.selyen.MyFirebaseMessagingService"
+            android:name=".MyFirebaseMessagingService"
             android:enabled="true"
             android:exported="true"
             android:stopWithTask="false">
@@ -61,15 +63,15 @@
             </intent-filter>
         </service>
 
-        <activity android:name="com.classy.selyen.CommuPageActivity" />
+        <activity android:name=".CommuPageActivity" />
         <activity
-            android:name="com.classy.selyen.PictureZoomUrlActivity"
+            android:name=".PictureZoomUrlActivity"
             android:theme="@style/PictureZoomTheme" />
         <activity
-            android:name="com.classy.selyen.ChangeNicnameActivity"
+            android:name=".ChangeNicnameActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.ChangeEmailActivity"
+            android:name=".ChangeEmailActivity"
             android:screenOrientation="portrait" />
 
         <provider
@@ -86,19 +88,19 @@
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/CropTheme" />
         <activity
-            android:name="com.classy.selyen.AppVersionPrintActivity"
+            android:name=".AppVersionPrintActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.OSS_License_Activity"
+            android:name=".OSS_License_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.PictureZoomActivity"
+            android:name=".PictureZoomActivity"
             android:theme="@style/PictureZoomTheme" />
         <activity
-            android:name="com.classy.selyen.NoticeActivity"
+            android:name=".NoticeActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.MapLocationApplyActivity"
+            android:name=".MapLocationApplyActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MapTheme" />
 
@@ -107,54 +109,54 @@
             android:value="AIzaSyCo5Y9SAI7nQyR-cg1CUnojgtK_YoSqFGA" />
 
         <activity
-            android:name="com.classy.selyen.FingerPrintActivity"
+            android:name=".FingerPrintActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.classy.selyen.AppPassInputActivity"
+            android:name=".AppPassInputActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.classy.selyen.UserProfileEditActivity"
+            android:name=".UserProfileEditActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.MainSettingActivity"
+            android:name=".MainSettingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SettingTheme" />
         <activity
-            android:name="com.classy.selyen.ChangePasswordActivity"
+            android:name=".ChangePasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.FindPasswordActivity"
+            android:name=".FindPasswordActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.GPS_Service_TosView_Activity"
+            android:name=".GPS_Service_TosView_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.PersonalInfo_TosView_Activity"
+            android:name=".PersonalInfo_TosView_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.Selyen_TosView_Activity"
+            android:name=".Selyen_TosView_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.CompleteSignUpActivity"
+            android:name=".CompleteSignUpActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
-            android:name="com.classy.selyen.SignUp_Activity"
+            android:name=".SignUp_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.SelfcertificationActivity"
+            android:name=".SelfcertificationActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.TOS_Activity"
+            android:name=".TOS_Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.classy.selyen.LogIn_Activity"
+            android:name=".LogIn_Activity"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme" />
         <activity
-            android:name="com.classy.selyen.SplashActivity"
+            android:name=".SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme">
             <intent-filter>
@@ -164,7 +166,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.classy.selyen.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme" />
     </application>

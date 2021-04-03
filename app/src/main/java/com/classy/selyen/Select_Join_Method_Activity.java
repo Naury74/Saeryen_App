@@ -48,6 +48,7 @@ public class Select_Join_Method_Activity extends AppCompatActivity {
                 //Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
                 if (resultCode == RESULT_OK) {//이미지 및 코드입력 성공
                     //Toast.makeText(Select_Join_Method_Activity.this, "Result: " + data.getStringExtra("input_code"), Toast.LENGTH_SHORT).show();
+
                     if(data.getStringExtra("input_code").equals(request_code)){
 
                         SharedPreferences.Editor editor_user = UserData.edit();
@@ -71,6 +72,8 @@ public class Select_Join_Method_Activity extends AppCompatActivity {
                         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                         finish();
 
+                        Toast.makeText(Select_Join_Method_Activity.this, "가입 성공", Toast.LENGTH_SHORT).show();
+
                     }else {
                         Toast.makeText(Select_Join_Method_Activity.this, "가입 코드가 일치하지 않습니다. 다시 인증해 주세요", Toast.LENGTH_SHORT).show();
                     }
@@ -79,7 +82,8 @@ public class Select_Join_Method_Activity extends AppCompatActivity {
                 }
             } else {//QR 스캔 성공
                 //Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
-                if(result.getContents().toString().equals(request_code)){
+                String scan_code = result.getContents().toString().substring(20, 26);
+                if(scan_code.equals(request_code)){
 
                     SharedPreferences.Editor editor_user = UserData.edit();
 
@@ -101,6 +105,8 @@ public class Select_Join_Method_Activity extends AppCompatActivity {
                     startActivity(intent);
                     overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                     finish();
+
+                    Toast.makeText(Select_Join_Method_Activity.this, "가입 성공", Toast.LENGTH_SHORT).show();
 
                 }else {
                     Toast.makeText(Select_Join_Method_Activity.this, "가입 코드가 일치하지 않습니다. 다시 인증해 주세요", Toast.LENGTH_SHORT).show();

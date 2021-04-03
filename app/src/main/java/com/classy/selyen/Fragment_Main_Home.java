@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.OvershootInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -39,6 +40,7 @@ public class Fragment_Main_Home extends Fragment implements View.OnClickListener
 
     FloatingActionButton w_notice_Fab, w_border_Fab, mainFab;
     TextView w_border_Fab_text, w_notice_Fab_text;
+    ImageView block_setting_btn;
 
     private boolean isOpen = false;
 
@@ -59,7 +61,9 @@ public class Fragment_Main_Home extends Fragment implements View.OnClickListener
                 cover_layout.setVisibility(View.VISIBLE);
                 showUpAndDownBounce(w_notice_Fab,-400f,250,true,true);
                 showUpAndDownBounce(w_border_Fab,-200f,250,true,true);
-                w_notice_Fab_text.setVisibility(View.VISIBLE);
+                if(UserData.getString("actual_resid", "").equals("admin")){
+                    w_notice_Fab_text.setVisibility(View.VISIBLE);
+                }
                 showUpAndDownBounce(w_notice_Fab_text,-400f,250,true,true);
                 w_border_Fab_text.setVisibility(View.VISIBLE);
                 showUpAndDownBounce(w_border_Fab_text,-200f,250,true,true);
@@ -94,6 +98,9 @@ public class Fragment_Main_Home extends Fragment implements View.OnClickListener
             showUpAndDownBounce(w_notice_Fab,0f,200,true,false);
             showUpAndDownBounce(w_border_Fab,0f,200,true,false);
             isOpen = false;
+        }else if(v.getId() == R.id.block_setting_btn){
+            Intent intent = new Intent(context, CreateBlockQRActivity.class);
+            startActivity(intent);
         }
 
     }
@@ -124,12 +131,14 @@ public class Fragment_Main_Home extends Fragment implements View.OnClickListener
         w_border_Fab_text = (TextView)rootView.findViewById(R.id.w_border_Fab_text);
         w_notice_Fab_text = (TextView)rootView.findViewById(R.id.w_notice_Fab_text);
         cover_layout = (ConstraintLayout)rootView.findViewById(R.id.cover_layout);
+        block_setting_btn = (ImageView)rootView.findViewById(R.id.block_setting_btn);
         plus_img.setOnClickListener(this);
         no_community_title.setOnClickListener(this);
         mainFab.setOnClickListener(this);
         w_notice_Fab.setOnClickListener(this);
         w_border_Fab.setOnClickListener(this);
         cover_layout.setOnClickListener(this);
+        block_setting_btn.setOnClickListener(this);
         //no_community_Layout.setOnClickListener(this);
 
         user_name.setText(UserData.getString("user_name", ""));
@@ -153,6 +162,7 @@ public class Fragment_Main_Home extends Fragment implements View.OnClickListener
             sub_addr_text.setText(UserData.getString("addr_sub", ""));
             mainFab.setVisibility(View.VISIBLE);
             w_notice_Fab.setVisibility(View.GONE);
+            w_notice_Fab_text.setVisibility(View.GONE);
             w_border_Fab.setVisibility(View.VISIBLE);
             //no_community_Layout.setVisibility(View.VISIBLE);
         }else if(UserData.getString("actual_resid", "").equals("admin")){
@@ -160,6 +170,7 @@ public class Fragment_Main_Home extends Fragment implements View.OnClickListener
             mainFab.setVisibility(View.VISIBLE);
             w_notice_Fab.setVisibility(View.VISIBLE);
             w_border_Fab.setVisibility(View.VISIBLE);
+            block_setting_btn.setVisibility(View.VISIBLE);
             //no_community_Layout.setVisibility(View.VISIBLE);
         }
 

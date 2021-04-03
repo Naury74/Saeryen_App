@@ -706,7 +706,7 @@ public class Address_Map_Find_Activity extends AppCompatActivity implements OnMa
                 address_return = jsonObject.getString("address");
                 addr_detail_return = jsonObject.getString("addr_detail");
                 block_code_return = jsonObject.getString("block_code");
-                //dump_code_return = jsonObject.getString("dump_code");
+                dump_code_return = block_code_return.substring(0, 6);
             }else if(return_check.equals("Not_Found")){
                 address_return = jsonObject.getString("address");
                 addr_detail_return = "";
