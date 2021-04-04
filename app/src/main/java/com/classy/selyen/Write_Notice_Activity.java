@@ -376,7 +376,7 @@ public class Write_Notice_Activity extends AppCompatActivity {
         File storage = getCacheDir();
         String fileName = "cache_img.jpg";
 
-        File file_path = new File(storage,fileName);;
+        File file_path = new File(storage,fileName);
         try{
 
             FileOutputStream out = new FileOutputStream(file_path);

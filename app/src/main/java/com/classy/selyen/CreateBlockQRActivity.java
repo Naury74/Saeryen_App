@@ -6,21 +6,45 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.provider.MediaStore;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder;
+import com.kakao.kakaolink.v2.KakaoLinkResponse;
+import com.kakao.kakaolink.v2.KakaoLinkService;
+import com.kakao.message.template.ButtonObject;
+import com.kakao.message.template.ContentObject;
+import com.kakao.message.template.FeedTemplate;
+import com.kakao.message.template.LinkObject;
+import com.kakao.message.template.LocationTemplate;
+import com.kakao.message.template.SocialObject;
+import com.kakao.network.ErrorResult;
+import com.kakao.network.callback.ResponseCallback;
+import com.kakao.network.storage.ImageUploadResponse;
+import com.kakao.util.helper.log.Logger;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 public class CreateBlockQRActivity extends AppCompatActivity {
@@ -32,10 +56,15 @@ public class CreateBlockQRActivity extends AppCompatActivity {
     SharedPreferences UserData;
 
     Bitmap QRbitmap;
+    String num_code;
 
     String conversionTime = "000130";
     int timer_state = 0;
     CountDownTimer c_timer;
+
+    String qr_img_url;
+
+    CustomAnimationLoadingDialog customAnimationLoadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +83,26 @@ public class CreateBlockQRActivity extends AppCompatActivity {
     public void onClick_ShareQR(View v){
 
         if(QRbitmap!=null){
-            Uri imageToShare = Uri.parse(MediaStore.Images.Media.insertImage(CreateBlockQRActivity.this.getContentResolver(), QRbitmap, "Share image", null));
-            String textToShare = "세련 블록 가입인증: " + UserData.getString("addr_sub", "") + "\nQR인증에서 QR이미지를 스캔하거나 블록가입 코드 "+block_code_text.getText().toString()+"를 입력해 주세요.";
+            final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(CreateBlockQRActivity.this,R.style.BottomSheetDialogTheme);
+            View bottomSheetView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.qr_share_method_select_bottomsheet,(LinearLayout)findViewById(R.id.container_bottom_sheet));
+            bottomSheetDialog.setCanceledOnTouchOutside(false);
 
-            Intent share = new Intent(Intent.ACTION_SEND);
-            share.setType("image/*");
-            share.putExtra(Intent.EXTRA_TEXT, textToShare);
-            share.putExtra(Intent.EXTRA_STREAM, imageToShare);
-            startActivity(Intent.createChooser(share, "Share with"));
+            bottomSheetView.findViewById(R.id.kakao_btn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    kakaolink();
+                    bottomSheetDialog.dismiss();
+                }
+            });
+            bottomSheetView.findViewById(R.id.share_btn).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DefaultShare();
+                    bottomSheetDialog.dismiss();
+                }
+            });
+            bottomSheetDialog.setContentView(bottomSheetView);
+            bottomSheetDialog.show();
         }else{
             Toast.makeText(this, "QR 정보를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show();
         }
@@ -74,7 +115,7 @@ public class CreateBlockQRActivity extends AppCompatActivity {
             if(!UserData.getString("block_code", "").equals(null)){
                 cover_background_Layout.setVisibility(View.GONE);
                 String text_code = make_rnd_string()+UserData.getString("block_code", "");
-                String num_code = text_code.substring(20, 26);
+                num_code = text_code.substring(20, 26);
                 BitMatrix bitMatrix = multiFormatWriter.encode(text_code, BarcodeFormat.QR_CODE,300,300);
                 BarcodeEncoder barcodeEncoder = new BarcodeEncoder();
                 QRbitmap = barcodeEncoder.createBitmap(bitMatrix);
@@ -197,6 +238,82 @@ public class CreateBlockQRActivity extends AppCompatActivity {
 
             }
         }.start();
+
+    }
+
+    public void DefaultShare() {
+        Uri imageToShare = Uri.parse(MediaStore.Images.Media.insertImage(CreateBlockQRActivity.this.getContentResolver(), QRbitmap, "Share image", null));
+        String textToShare = "세련 블록 가입인증: " + UserData.getString("addr_sub", "") + "\n세련앱 QR인증에서 QR이미지를 스캔하거나 블록가입 코드 "+block_code_text.getText().toString()+"를 입력해 주세요.";
+
+        Intent share = new Intent(Intent.ACTION_SEND);
+        share.setType("image/*");
+        share.putExtra(Intent.EXTRA_TEXT, textToShare);
+        share.putExtra(Intent.EXTRA_STREAM, imageToShare);
+        startActivity(Intent.createChooser(share, "Share with"));
+    }
+
+    public void kakaolink() {
+        //qr_이미지 업로드용 파일 생성
+        customAnimationLoadingDialog = new CustomAnimationLoadingDialog(CreateBlockQRActivity.this);
+        customAnimationLoadingDialog.show();
+        Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.img_share_title);
+
+        File qr_file = new File(CreateBlockQRActivity.this.getCacheDir(),"QRimg.png");
+        try {
+            FileOutputStream out = new FileOutputStream(qr_file);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //카카오 링크 이미지 파일 미지원으로 파일을 카카오 서버에 업로드하여 링크를 받아옴
+        KakaoLinkService.getInstance().uploadImage(this, true, qr_file, new ResponseCallback<ImageUploadResponse>() {
+            @Override
+            public void onFailure(ErrorResult errorResult) {
+                Log.e("QR_UPLOAD_TAG", "이미지 업로드 실패: "+ errorResult);
+                Toast.makeText(CreateBlockQRActivity.this, "카카오 서버 연결에 실패했습니다.", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onSuccess(ImageUploadResponse result) {
+                Log.i("QR_UPLOAD_TAG", "이미지 업로드 성공 \n${imageUploadResult.infos.original}"+"\n업로드 성공 결과: "+result);
+                qr_img_url = result.getOriginal().getUrl();//url 파싱
+
+                LocationTemplate template = LocationTemplate.newBuilder(UserData.getString("addr", ""), ContentObject.newBuilder("블록 초대, 블록에 참여해 보세요! \n인증 코드: "+num_code,
+                        qr_img_url,
+                        LinkObject.newBuilder().setWebUrl("https://developers.kakao.com")
+                                .setMobileWebUrl("https://developers.kakao.com").build())
+                                .setDescrption(UserData.getString("addr", "")+" "+UserData.getString("addr_sub", ""))
+                                .build())
+                        .addButton(new ButtonObject("블록 참여하기", LinkObject.newBuilder()
+                                .setAndroidExecutionParams("key1=value1")
+                                .setAndroidExecutionParams("key2=value2")
+                                .setAndroidExecutionParams("key3=value3")
+                                .setIosExecutionParams("key11=value11")
+                                .build()))
+                        .build();
+
+                Map<String, String> serverCallbackArgs = new HashMap<String, String>();
+                serverCallbackArgs.put("user_id", "${current_user_id}");
+                serverCallbackArgs.put("product_id", "${shared_product_id}");
+
+                KakaoLinkService.getInstance().sendDefault(CreateBlockQRActivity.this, template, serverCallbackArgs, new ResponseCallback<KakaoLinkResponse>() {
+                    @Override
+                    public void onFailure(ErrorResult errorResult) {
+                        Logger.e(errorResult.toString());
+                    }
+
+                    @Override
+                    public void onSuccess(KakaoLinkResponse result) {
+                        // 템플릿 밸리데이션과 쿼터 체크가 성공적으로 끝남. 톡에서 정상적으로 보내졌는지 보장은 할 수 없다. 전송 성공 유무는 서버콜백 기능을 이용하여야 한다.
+                    }
+                });
+                customAnimationLoadingDialog.dismiss();
+            }
+        });
 
     }
 }
