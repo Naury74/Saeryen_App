@@ -6,8 +6,10 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -53,6 +55,7 @@ public class SplashActivity extends AppCompatActivity {
     String user_img_return = "";
     String addr_sub_return = "";
     String block_code_return = "";
+    String kakao_invite_addr = "";
 
     public static Context context_splash;
 
@@ -66,6 +69,7 @@ public class SplashActivity extends AppCompatActivity {
     ConstraintLayout main_background_Layout;
 
     String newToken = "";
+    Intent getintent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +92,14 @@ public class SplashActivity extends AppCompatActivity {
         newUiOptions ^= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
         getWindow().getDecorView().setSystemUiVisibility(newUiOptions);
         context_splash = this;
+        getintent = getIntent();
+
+        if(getintent.getData()!=null){
+            Uri uri = getintent.getData();
+            Log.d(TAG,"----------kakao_parameter-------------");
+            Log.d(TAG,"kakao_addr: "+uri.getQueryParameter("addr"));
+            kakao_invite_addr = uri.getQueryParameter("addr");
+        }
 
         main_background_Layout = (ConstraintLayout)findViewById(R.id.main_background_Layout);
 
@@ -190,11 +202,28 @@ public class SplashActivity extends AppCompatActivity {
 
                 save_user_data();
 
-                Intent intent = new Intent(context_splash, MainActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
-                startActivity(intent);
-                overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-                finish();
+                if(getintent.getAction()==Intent.ACTION_VIEW){
+                    if(getintent.getData().getQueryParameter("addr")!=null){
+                        Intent intent = new Intent(context_splash, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.putExtra("addr", getintent.getData().getQueryParameter("addr"));
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        finish();
+                    }else{
+                        Intent intent = new Intent(context_splash, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        startActivity(intent);
+                        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        finish();
+                    }
+                }else {
+                    Intent intent = new Intent(context_splash, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                    finish();
+                }
             }else{
                 if(err_return.equals("")){
                     //Snackbar.make(main_background_Layout, "서버연결에 실패했습니다. 잠시후 다시 시도해 주세요.", Snackbar.LENGTH_LONG).show();

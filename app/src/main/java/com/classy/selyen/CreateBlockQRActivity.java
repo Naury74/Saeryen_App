@@ -289,10 +289,8 @@ public class CreateBlockQRActivity extends AppCompatActivity {
                                 .setDescrption(UserData.getString("addr", "")+" "+UserData.getString("addr_sub", ""))
                                 .build())
                         .addButton(new ButtonObject("블록 참여하기", LinkObject.newBuilder()
-                                .setAndroidExecutionParams("key1=value1")
-                                .setAndroidExecutionParams("key2=value2")
-                                .setAndroidExecutionParams("key3=value3")
-                                .setIosExecutionParams("key11=value11")
+                                .setAndroidExecutionParams("addr="+UserData.getString("addr", ""))
+                                .setIosExecutionParams("key1=value1")
                                 .build()))
                         .build();
 

@@ -542,7 +542,7 @@ public class Address_Map_Find_Activity extends AppCompatActivity implements OnMa
     }
 
     String result_check_json;
-    //로그인 시에 서버에 로그인 정보 넘겨주고 리턴값 받음
+    //블록 체크용
     class Block_Check extends AsyncTask<String, Void, String> {
 
         CustomAnimationLoadingDialog customAnimationLoadingDialog = new CustomAnimationLoadingDialog(Address_Map_Find_Activity.this);
@@ -734,7 +734,6 @@ public class Address_Map_Find_Activity extends AppCompatActivity implements OnMa
 
     ////////////////////////////////////////////////////////////////////////////////////아래로 블럭생성
     String block_add_result_check_json;
-    //로그인 시에 서버에 로그인 정보 넘겨주고 리턴값 받음
     class Block_ADD extends AsyncTask<String, Void, String> {
 
         CustomAnimationLoadingDialog customAnimationLoadingDialog = new CustomAnimationLoadingDialog(Address_Map_Find_Activity.this);

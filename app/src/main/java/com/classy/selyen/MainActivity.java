@@ -10,6 +10,7 @@ import androidx.lifecycle.ProcessLifecycleOwner;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity implements LifecycleObserver
     Boolean lock_set_check = false;
 
     TabLayout tabs;
+    SharedPreferences UserData;
 
     Fragment_Main_Home fragment_main_home;
     Fragment_Main_Timeline fragment_main_timeline;
@@ -56,6 +58,8 @@ public class MainActivity extends AppCompatActivity implements LifecycleObserver
         LockScreenPref = getSharedPreferences("app_lock",MODE_PRIVATE);
         lock_set_check = LockScreenPref.getBoolean("app_lock_state", false);
         Log.d("MAIN_ACTIVITY_TEST", "SampleLifeCycle - 앱락상태: "+lock_set_check);
+
+        UserData = getSharedPreferences("user_data",MODE_PRIVATE);
 
         ProcessLifecycleOwner.get().getLifecycle().addObserver(this);
 
@@ -118,6 +122,18 @@ public class MainActivity extends AppCompatActivity implements LifecycleObserver
 
             }
         });
+
+        Intent intent = getIntent();
+        if(intent.hasExtra("addr")){//카카오 링크로 실행될 경우
+            String invite_addr = intent.getStringExtra("addr");
+            Log.d(TAG,"kakao_invite_addr: "+invite_addr);
+            if(UserData.getString("actual_resid", "").equals("false")){
+                Intent popupintent = new Intent(MainActivity.this, JoinBlockKakaoInviteActivity.class);
+                popupintent.putExtra("addr", invite_addr);
+                startActivity(popupintent);
+            }
+        }
+
 
     }
 

@@ -28,8 +28,11 @@
         android:supportsRtl="true"
         android:theme="@style/MainTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".CreateBlockQRActivity"/>
+        <activity android:name=".JoinBlockKakaoInviteActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/MapTheme"></activity>
+        <activity android:name=".CreateBlockQRActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Write_Post_Activity"
             android:screenOrientation="portrait" />
@@ -167,17 +170,20 @@
             </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="@string/kakao_scheme"
-                    android:host="@string/kakaolink_host" />
+                <data
+                    android:host="@string/kakaolink_host"
+                    android:scheme="@string/kakao_scheme" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/MainTheme" />
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
