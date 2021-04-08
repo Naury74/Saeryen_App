@@ -69,7 +69,7 @@ public class Address_Map_Find_Activity extends AppCompatActivity implements OnMa
     String server_adress = "http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com/seryeon_Find_Group.php";//블록 체크 데이터 정보 전송 경로
     String add_server_adress = "http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com/seryeon_Creating_Group.php";//블록 추가 데이터 정보 전송 경로
 
-    private static final String TAG = "googlemap_example";
+    private static final String TAG = "map_block_select";
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 300000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
