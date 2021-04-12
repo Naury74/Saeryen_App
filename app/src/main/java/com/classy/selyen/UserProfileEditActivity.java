@@ -189,7 +189,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
         }
 
         Picasso.get()
-                .load("http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com/"+UserData.getString("user_img", ""))
+                .load("http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com"+UserData.getString("user_img", ""))
                 .error(R.drawable.ic_default_user2)
                 .into(imageView);
     }
@@ -199,7 +199,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
         if(imageView.getDrawable()!=null){
 
             Intent intent = new Intent(this, PictureZoomUrlActivity.class);
-            intent.putExtra("image","http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com/"+UserData.getString("user_img", ""));
+            intent.putExtra("image","http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com"+UserData.getString("user_img", ""));
             startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         }
