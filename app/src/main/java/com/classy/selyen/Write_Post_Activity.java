@@ -258,7 +258,7 @@ public class Write_Post_Activity extends AppCompatActivity {
 
             }
             if(photoFile != null) {
-                Uri photoURI = FileProvider.getUriForFile(this, "com.example.selyen.fileprovider", photoFile);
+                Uri photoURI = FileProvider.getUriForFile(this, "com.classy.selyen.fileprovider", photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_TAKE_PHOTO);
             }

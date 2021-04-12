@@ -189,7 +189,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
         }
 
         Picasso.get()
-                .load("http://ec2-3-36-108-8.ap-northeast-2.compute.amazonaws.com"+UserData.getString("user_img", ""))
+                .load("http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com/"+UserData.getString("user_img", ""))
                 .error(R.drawable.ic_default_user2)
                 .into(imageView);
     }
@@ -199,7 +199,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
         if(imageView.getDrawable()!=null){
 
             Intent intent = new Intent(this, PictureZoomUrlActivity.class);
-            intent.putExtra("image","http://ec2-3-36-108-8.ap-northeast-2.compute.amazonaws.com"+UserData.getString("user_img", ""));
+            intent.putExtra("image","http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com/"+UserData.getString("user_img", ""));
             startActivity(intent);
             overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         }
@@ -354,7 +354,7 @@ public class UserProfileEditActivity extends AppCompatActivity {
             JSONObject result = null;
             try{
 
-                URL url = new URL("http://ec2-3-36-108-8.ap-northeast-2.compute.amazonaws.com/seryeon_Upload_Image.php/");
+                URL url = new URL("http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com/seryeon_Change_Profile_Image.php/");
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
                 conn.setConnectTimeout(MAX_CONNECT_TIME);
