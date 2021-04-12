@@ -25,6 +25,8 @@ import android.widget.Toast;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
+import com.squareup.picasso.MemoryPolicy;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
@@ -191,6 +193,8 @@ public class UserProfileEditActivity extends AppCompatActivity {
         Picasso.get()
                 .load("http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com"+UserData.getString("user_img", ""))
                 .error(R.drawable.ic_default_user2)
+                .memoryPolicy(MemoryPolicy.NO_CACHE )
+                .networkPolicy(NetworkPolicy.NO_CACHE)
                 .into(imageView);
     }
 
@@ -328,6 +332,9 @@ public class UserProfileEditActivity extends AppCompatActivity {
             Log.d(TAG, "Data Post - App : " + result);
 
             if(ch_img_check.equals("SUCCESS")){
+
+                finish();
+                startActivity(new Intent(UserProfileEditActivity.this, UserProfileEditActivity.class));
 
             }else{
                 //Snackbar.make(main_background_Layout, err_return, Snackbar.LENGTH_LONG).show();
