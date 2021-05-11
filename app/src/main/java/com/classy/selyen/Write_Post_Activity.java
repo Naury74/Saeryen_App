@@ -76,7 +76,7 @@ public class Write_Post_Activity extends AppCompatActivity {
     SharedPreferences UserData;
     String content_type = "Posted";
     String deadline_state = "false";
-    String deadline_time = "";
+    String deadline_time = " ";
 
     /////////////리턴 수신용
     String sign_check_return = "";
@@ -344,7 +344,7 @@ public class Write_Post_Activity extends AppCompatActivity {
                 int maxBufferSize = 1 * 1024 * 1024;
 
 
-                URL url = new URL("서버주소/php");
+                URL url = new URL("http://ec2-13-124-191-53.ap-northeast-2.compute.amazonaws.com/seryeon_Chating.php");
 
 
                 // Open a HTTP  connection to  the URL
@@ -364,7 +364,7 @@ public class Write_Post_Activity extends AppCompatActivity {
 
                 // 텍스트 데이터들
                 wr.writeBytes("\r\n--" + boundary + "\r\n");
-                wr.writeBytes("Content-Disposition: form-data; name=\"user_ph\"\r\n\r\n" + UserData.getString("hp_num", ""));
+                wr.writeBytes("Content-Disposition: form-data; name=\"ph_num\"\r\n\r\n" + UserData.getString("ph_num", ""));
                 wr.writeBytes("\r\n--" + boundary + "\r\n");
 
                 wr.writeBytes("\r\n--" + boundary + "\r\n");
@@ -375,17 +375,6 @@ public class Write_Post_Activity extends AppCompatActivity {
                 wr.writeBytes("Content-Disposition: form-data; name=\"Main_Content\"\r\n\r\n" + text_input.getText().toString());
                 wr.writeBytes("\r\n--" + boundary + "\r\n");
 
-                if(deadline_state.equals("true")){
-                    wr.writeBytes("\r\n--" + boundary + "\r\n");
-                    wr.writeBytes("Content-Disposition: form-data; name=\"Is_Deadline\"\r\n\r\n" + deadline_state);
-                    wr.writeBytes("\r\n--" + boundary + "\r\n");
-
-                    wr.writeBytes("\r\n--" + boundary + "\r\n");
-                    wr.writeBytes("Content-Disposition: form-data; name=\"Deadline_Time\"\r\n\r\n" + deadline_time);
-                    wr.writeBytes("\r\n--" + boundary + "\r\n");
-                }
-
-
                 ArrayList<Bitmap> bitmaps = adapter.getList();
 
                 // PHP 에서 반복문을 사용하기 위하여 이미지 갯수를 센다.
@@ -393,7 +382,15 @@ public class Write_Post_Activity extends AppCompatActivity {
                 wr.writeBytes("Content-Disposition: form-data; name=\"Image_Count\"\r\n\r\n" + bitmaps.size());
                 wr.writeBytes("\r\n--" + boundary + "\r\n");
 
+                if(deadline_state.equals("true")){
+                    wr.writeBytes("\r\n--" + boundary + "\r\n");
+                    wr.writeBytes("Content-Disposition: form-data; name=\"Is_Deadline\"\r\n\r\n" + "FALSE");
+                    wr.writeBytes("\r\n--" + boundary + "\r\n");
 
+                    wr.writeBytes("\r\n--" + boundary + "\r\n");
+                    wr.writeBytes("Content-Disposition: form-data; name=\"Deadline_Time\"\r\n\r\n" + deadline_time);
+                    wr.writeBytes("\r\n--" + boundary + "\r\n");
+                }
 
 
                 // 파일의 존재 유무 확인 후 ( 파일이 없는 경우  그냥 지나간다 )
